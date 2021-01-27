@@ -1,0 +1,4 @@
+<!--miniprogram/pages/profile/profile.wxml-->
+<view class="container">
+  <nav-bar title="我的"></nav-bar>
+</view>

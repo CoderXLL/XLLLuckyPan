@@ -1,0 +1,29 @@
+/* components/nav-bar/nav-bar.wxss */
+.nav-container {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.nav-bar {
+  text-align: center;
+  line-height: 44px;
+  position: relative;
+}
+
+.icons {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.icons image {
+  width: 32rpx;
+  height: 32rpx;
+}

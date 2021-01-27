@@ -1,0 +1,13 @@
+<!--components/nav-bar/nav-bar.wxml-->
+<view>
+  <view style="height: {{statusBarHeight + navBarHeight}}px"></view>
+  <view class="nav-container" style="background-color: {{barColor}}">
+    <view class="status-bar" style="height: {{statusBarHeight}}px"></view>
+    <view class="nav-bar" style="height: {{navBarHeight}}px; color: {{titleColor}}">
+      {{title}}
+      <view class="icons">
+        <image bindtap="onBackBtnClick" wx:if="{{isBack==true}}" class="back" src="/images/nav_back.png" />
+      </view>
+    </view>
+  </view>
+</view>

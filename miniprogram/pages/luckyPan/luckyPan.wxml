@@ -1,0 +1,28 @@
+<!--miniprogram/pages/luckyPan/luckyPan.wxml-->
+
+<view class="container">
+  <nav-bar title="幸运转盘" barColor="clear"></nav-bar>
+  <image class="background-container" src="/images/bg_raffle.png"></image>
+  <view class="lucky_container">
+    <view class="lucky_row">
+      <image class="lucky_item {{currentIndex == 0 ? 'hilighted' : ''}}" src="{{luckyGift[0].giftIcon}}" ></image>
+      <image class="lucky_item {{currentIndex == 1 ? 'hilighted' : ''}}" src="{{luckyGift[1].giftIcon}}"></image>
+      <image class="lucky_item {{currentIndex == 2 ? 'hilighted' : ''}}" src="{{ luckyGift[2].giftIcon }}"></image>
+    </view>
+
+    <view class="lucky_row">
+      <image class="lucky_item {{currentIndex == 7 ? 'hilighted' : ''}}" src="{{ luckyGift[3].giftIcon }}"></image>
+      <view class="lucky_item">
+        <text>开始抽奖</text>
+        <button class="lucky_item_btn" bindtap="onStartBtnClick"></button>
+      </view>
+      <image class="lucky_item {{currentIndex == 3 ? 'hilighted' : ''}}" src="{{ luckyGift[4].giftIcon }}"></image>
+    </view>
+
+    <view class="lucky_row">
+      <image class="lucky_item {{currentIndex == 6 ? 'hilighted' : ''}}" src="{{ luckyGift[5].giftIcon }}"></image>
+      <image class="lucky_item {{currentIndex == 5 ? 'hilighted' : ''}}" src="{{ luckyGift[6].giftIcon }}"></image>
+      <image class="lucky_item {{currentIndex == 4 ? 'hilighted' : ''}}" src="{{ luckyGift[7].giftIcon }}"></image>
+    </view>
+  </view>
+</view>
