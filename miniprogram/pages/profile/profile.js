@@ -1,66 +1,74 @@
 // miniprogram/pages/profile/profile.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    isLogin: {
+      type: Boolean,
+      value: false
+    },
+    userInfo: {
+      type: Object,
+      value: {}
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-
+    const isLogin = wx.getStorageSync(wx.loginStatusKey)
+    const userInfo = wx.getStorageSync(wx.dbUserInfoKey)
+    this.setData({
+      isLogin: isLogin == undefined ? false : isLogin,
+      userInfo: userInfo == undefined ? {} : userInfo
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onLoginBtnClick: function() {
+    this.getSettings()
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onLogoutBtnClick: function() {
+    wx.setStorageSync(wx.loginStatusKey, false);
+    wx.setStorageSync(wx.dbUserInfoKey, {});
+    this.setData({
+      isLogin: false,
+      userInfo: {}
+    })
+  },
+  
+  getSettings: function() {
+    wx.getSetting().then(res => {
+      if (res.authSetting["scope.userInfo"]) {
+        //授权成功
+        this.getUserInfo()
+      } else {
+        this.authorize()
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  authorize: function() {
+    wx.openSetting({
+      withSubscriptions: true,
+    }).then(res => {
+      console.log(res)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  getUserInfo: function() {
+    wx.getUserInfo().then(res => {
+      this.login(res.userInfo)
+    })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  login: function(userInfo){
+    wx.login().then(res => {
+      if (res.code) {
+        //本地储存
+        wx.setStorageSync(wx.dbUserInfoKey, userInfo)
+        wx.setStorageSync(wx.loginStatusKey, true)
+        this.setData({
+          isLogin: true,
+          userInfo: userInfo
+        })
+      }
+    })
   }
 })

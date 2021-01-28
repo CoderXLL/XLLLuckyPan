@@ -1,4 +1,26 @@
 <!--miniprogram/pages/profile/profile.wxml-->
 <view class="container">
-  <nav-bar title="我的"></nav-bar>
+  <nav-bar title="我的" titleColor="white" barColor="clear"></nav-bar>
+  <view class="login-wrapper">
+      <image class="login-bgIcon" src="/images/bg_mine_login.png" mode="aspectFill" />
+      <button 
+        wx:if="{{!isLogin}}"
+        class="loginBtn" 
+        open-type="getUserInfo" 
+        bindgetuserinfo="onLoginBtnClick"
+      >
+        登录
+      </button>
+      <view wx:else class="userInfo-wrapper">
+        <image class="headPoritral" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+        <view class="nickName">{{userInfo.nickName}}</view>
+      </view>
+      <view 
+        wx:if="{{isLogin}}" 
+        class="lognoutBtn"
+        bindtap="onLogoutBtnClick"
+      >
+        退出
+      </view>
+    </view>
 </view>
